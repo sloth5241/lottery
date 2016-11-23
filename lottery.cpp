@@ -47,19 +47,15 @@ void printRedNumber() {
             } 
         }
     }// for 6个红球
-
+    //冒泡排序
+    bubbleSort (6, arrRed);
 }
-    //打印红球
-   // cout << "红球: "; 
-   // for(int i=1; i<=6; i++) {
-   //     cout << arrRed[i] << " "; 
-   // }
 
 void printBlueNumber() {
     //int blueNumberCount = 1;
     int blueNumberScope = 16;
     int blueBall = getRandNumber(blueNumberScope);
-    cout << " +篮球:" << blueBall << endl;
+    cout << " +" << blueBall << endl;
 }
 
 int main(int argc, char* argv[]) {
