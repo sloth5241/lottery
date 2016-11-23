@@ -1,26 +1,17 @@
 #include "randNumber.h"
-#include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <iostream>
 using namespace std;
+double random(double start, double end) {
 
-int getRandNumber(int valueScope){
-    /*
-     *返回非零的随机数
-     */
-    int randNumber = 0;
-    srand( (unsigned)time( NULL ) );
-    int temp = rand() % valueScope;
-    if (0 == temp) {
-        while(1) {
-            temp = rand() % valueScope;
-            if(0!=temp) {
-                randNumber = temp;
-                break;
-            }
-        }
-    }else{
-        randNumber = temp;
-    }
-    return randNumber;
+    return start+(end-start)*rand()/(RAND_MAX + 1.0);
+}
+
+int getRandNumber(int valueScope) {
+
+    int j;
+    // 设置种子
+    j = int(random(1,valueScope)); 
+    return j;
 }

@@ -5,27 +5,61 @@
 #include "bubbleSort.h"
 #include "randNumber.h"
 using namespace std;
-//using namespace RandNumber;
 
-
-const int size = 6;
 int arrRed[6]={0};
 
-
-void printRedNumber() {
-    int redNumberCount = 6;
-    int redNumberScope = 32;
-    //int tempRedBall = RandNumber::getRandNumber(redNumberScope);
-    //cout << "临时红球:" << tempRedBall << endl;
-    //生成非零随机数
+int redBallExist(int tempRedBall) {
+    /*
+     * return 1:不存在 2:存在
+     */
+    int flag = 1;
+    for(int i=1; i<=6; i++) {
+        if(arrRed[i] == tempRedBall) {
+            flag = 2;
+            break;
+        }
+        else{
+            continue;
+        }
+    }    
+    return flag;
 }
 
+void printRedNumber() {
+    int k =1;
+    int redNumberScope = 32;
+    //随机产生6个红球
+    for(int i=0; i<6; i++) {
+        int tempRedBall = getRandNumber(redNumberScope);
+        //判断预选号码是否重复
+        int result = redBallExist(tempRedBall);
+        if(1 == result) {
+            arrRed[k++] = tempRedBall;
+        }
+        else if(2 == result) {
+            while(1) {
+                tempRedBall = getRandNumber(redNumberScope);
+                result = redBallExist(tempRedBall);
+                if(1 == result) {
+                    arrRed[k++] = tempRedBall; 
+                    break;
+                } 
+            } 
+        }
+    }// for 6个红球
+
+}
+    //打印红球
+   // cout << "红球: "; 
+   // for(int i=1; i<=6; i++) {
+   //     cout << arrRed[i] << " "; 
+   // }
+
 void printBlueNumber() {
-    int blueNumberCount = 1;
+    //int blueNumberCount = 1;
     int blueNumberScope = 16;
     int blueBall = getRandNumber(blueNumberScope);
-    cout << "篮球:" << blueBall << endl;
-    //生成非零随机数
+    cout << " +篮球:" << blueBall << endl;
 }
 
 int main(int argc, char* argv[]) {
