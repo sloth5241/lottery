@@ -28,50 +28,84 @@ void bubbleSort (int n) {
     for (int i=6; i>=1; i--) {
         cout << arrRed[i] <<" ";
     }
+
+    //将数组置为0，为后续红号做准备    
+    for (int i=1; i<=6; i++){
+        arrRed[i] = 0;
+    }
 }
 
-void getRandNumbers(int count, int valueScope, string flag) {
+void getRedRandNumbers(int count, int valueScope) {
         int i,j;
         int k = 1;
-        // 设置种子
-        srand( (unsigned)time( NULL ) );
 
         /* 生成n 个随机数 */
         for( i = 1; i <= count; i++ ){
-            // 生成实际的随机数
             j= ( rand() % valueScope );    //%后面数字代表取值范围
-            if("red" == flag) {
+            //非零判断
+            if(0!=j) {
                 arrRed[k++] = j;
-            }
-        }/*for*/
+            }else{
+                while(1) {
+                    j= ( rand() % valueScope );    //%后面数字代表取值范围
+                    if(0!=j) {
+                        arrRed[k++] = j; 
+                        break;
+                    }
+                }
+                continue;
+            }/* else */
+        }
 
         //冒泡排序
-        if("red"==flag) {
-            bubbleSort(6);
-        }else{
-            //输出蓝号
-            cout << " + " << j << endl; 
+        bubbleSort(6);
+}
+
+void getBlueRandNumbers(int count, int valueScope) {
+        int i,j;
+
+        /* 生成n 个随机数 */
+        for( i = 1; i <= count; i++ ){
+            j= ( rand() % valueScope );    //%后面数字代表取值范围
+            //非零判断
+            if(0!=j) {
+                cout << " + " << j << endl; 
+            }else{
+                while(1) {
+                    j= ( rand() % valueScope );    //%后面数字代表取值范围
+                    if(0!=j){
+                        cout << " + " << j << endl; 
+                        break;
+                    }
+                }
+            }
         } 
 }
 
 void printRedNumber() {
     int redNumberCount = 6;
     int redNumberScope = 32;
-    getRandNumbers(redNumberCount, redNumberScope, "red");
+    getRedRandNumbers(redNumberCount, redNumberScope);
 }
 
 void printBlueNumber() {
     int blueNumberCount = 1;
     int blueNumberScope = 16;
-    getRandNumbers(blueNumberCount, blueNumberScope, "blue");
+    getBlueRandNumbers(blueNumberCount, blueNumberScope);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    //参数化: 设置测试循环次数
+    int loopCount = stoi(argv[1]);
+    // 设置种子
+    srand( (unsigned)time( NULL ) );
     try{ 
-        //打印红号
-        printRedNumber();
-        //打印蓝号
-        printBlueNumber();
+        for (int i=1; i<=loopCount; i++) {
+            //打印红号
+            printRedNumber();
+            //打印蓝号
+            printBlueNumber();
+        }
     }
     catch(const char* msg) {
         cout << "exception msg:" << msg << endl;
