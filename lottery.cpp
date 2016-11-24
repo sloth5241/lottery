@@ -60,6 +60,7 @@ void printBlueNumber() {
 
 int main(int argc, char* argv[]) {
     // 设置种子
+    srand((unsigned)time(NULL));
     try{ 
         int loopCount = 1;
         //参数化: 设置测试循环次数
