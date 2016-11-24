@@ -3,15 +3,18 @@
 #include <cstdlib>
 #include <iostream>
 using namespace std;
-double random(double start, double end) {
 
-    return start+(end-start)*rand()/(RAND_MAX + 1.0);
+int getRand(int valueScope) {
+    int start = 1;
+    int end = valueScope;
+    int j = start + rand() % (end-start+1);
+    return j;
 }
 
 int getRandNumber(int valueScope) {
 
     int j;
     // 设置种子
-    j = int(random(1,valueScope)); 
+    j = getRand(valueScope);
     return j;
 }
